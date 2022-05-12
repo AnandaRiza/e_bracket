@@ -1,3 +1,6 @@
+import 'package:e_bracket/screens/Userviews/home_page.dart';
+import 'package:e_bracket/screens/Userviews/login_page.dart';
+
 import 'screens/Userviews/register.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

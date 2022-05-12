@@ -1,3 +1,4 @@
+import 'package:e_bracket/screens/Userviews/home_page.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,8 @@ class _registerViewState extends State<registerView> {
   final _passwordController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordConfirmController = TextEditingController();
+  final _firstnameController = TextEditingController();
+  final _lastnameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +29,30 @@ class _registerViewState extends State<registerView> {
         key: _formKey,
         child: ListView(
           children: <Widget>[
+            TextFormField(
+              controller: _firstnameController,
+              decoration: InputDecoration(
+                labelText: 'First Name',
+              ),
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: _lastnameController,
+              decoration: InputDecoration(
+                labelText: 'Last Name',
+              ),
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
+            ),
             TextFormField(
               controller: _emailController,
               decoration: InputDecoration(
@@ -40,6 +67,7 @@ class _registerViewState extends State<registerView> {
             ),
             TextFormField(
               controller: _passwordController,
+              obscureText: true,
               decoration: InputDecoration(
                 labelText: 'Password',
               ),
@@ -52,6 +80,7 @@ class _registerViewState extends State<registerView> {
             ),
             TextFormField(
               controller: _passwordConfirmController,
+              obscureText: true,
               decoration: InputDecoration(
                 labelText: 'Confirm Password',
               ),
@@ -75,7 +104,8 @@ class _registerViewState extends State<registerView> {
                       password: _passwordController.text,
                     )
                         .then((user) {
-                      // Navigator.of(context).pushReplacementNamed('/home');
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => HomePage()));
                     }).catchError((error) {
                       print(error);
                     });
