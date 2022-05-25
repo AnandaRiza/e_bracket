@@ -117,10 +117,10 @@ class _registerViewState extends State<registerView> {
     );
   }
 
-  // Future _register() async {
-  //   await FirebaseAuth.instance.createUserWithEmailAndPassword(
-  //     email: _emailController.text,
-  //     password: _passwordConfirmController.text,
-  //   );
-  // }
+  Future _register() async {
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: _emailController.text,
+      password: _passwordConfirmController.text,
+    );
+  }
 }

@@ -6,6 +6,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:e_bracket/screens/Userviews/home_page.dart';
+import 'package:e_bracket/screens/Userviews/register.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -20,8 +23,16 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
 
   @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Center(
           child: Column(children: [
@@ -71,10 +82,17 @@ class _LoginPageState extends State<LoginPage> {
                       border: InputBorder.none,
                       hintText: 'Email',
                     ),
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      return null;
+                    },
                   ),
                 ),
               ),
             ),
+
             SizedBox(height: 30),
             // password textfield
             Padding(
@@ -94,28 +112,57 @@ class _LoginPageState extends State<LoginPage> {
                       border: InputBorder.none,
                       hintText: 'Password',
                     ),
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'Please enter your password';
+                      }
+                      return null;
+                    },
                   ),
                 ),
               ),
             ),
+
             SizedBox(height: 200),
             // sign in button
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 75.0),
-              child: Container(
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                    color: Color(0xFF79018C),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Center(
-                    child: Text(
-                  'Sign In',
-                  style: TextStyle(color: Colors.white),
-                )),
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState != null &&
+                      _formKey.currentState!.validate()) {
+                    FirebaseAuth.instance
+                        .signInWithEmailAndPassword(
+                            email: _emailController.text,
+                            password: _passwordController.text)
+                        .then((user) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
+                        ),
+                      );
+                    }).catchError((e) {
+                      print("Your Credentials are wrong");
+                    });
+                  }
+                },
+                child: Container(
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      color: Color(0xFF79018C),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Center(
+                      child: Text(
+                    'Sign In',
+                    style: TextStyle(color: Colors.white),
+                  )),
+                ),
               ),
             ),
-            SizedBox(height: 10),
 
+            SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -141,6 +188,13 @@ class _LoginPageState extends State<LoginPage> {
           ]),
         ),
       ),
+    );
+  }
+
+  Future _signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: _emailController.text,
+      password: _passwordController.text,
     );
   }
 }
