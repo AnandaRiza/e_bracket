@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:e_bracket/screens/Userviews/home_page.dart';
@@ -159,6 +160,24 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(color: Colors.white),
                   )),
                 ),
+              ),
+            ),
+
+            Center(
+              child: RichText(
+                text: TextSpan(
+                    text: 'Forgot Password?',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 0, 102, 255),
+                      fontSize: 20.0,
+                      decoration: TextDecoration.underline,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => forgotPassword()),
+                          )),
               ),
             ),
 
