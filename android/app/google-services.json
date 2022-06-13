@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "202704498184",
+    "project_id": "e-bracket-62bb4",
+    "storage_bucket": "e-bracket-62bb4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202704498184:android:c0a8e498ed9f38810a6bbd",
+        "android_client_info": {
+          "package_name": "com.example.e_bracket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202704498184-f64b5f3hdp852vbb51pqlu82egqtndo3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXRjGr7yduDySo5K4a_OgcK2PO30sNJUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202704498184-f64b5f3hdp852vbb51pqlu82egqtndo3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "202704498184-ib8d30da598936im28mudek959npck9o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eBracket"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
